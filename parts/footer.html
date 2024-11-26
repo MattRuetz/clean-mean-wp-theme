@@ -1,7 +1,90 @@
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-    <!-- wp:paragraph {"align":"center"} -->
-    <p class="has-text-align-center">© 2024 Your Site Name</p>
-    <!-- /wp:paragraph -->
-</div>
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"}}},"backgroundColor":"background","className":"site-footer","layout":{"type":"constrained"}} -->
+<footer class="wp-block-group site-footer has-background-background-color">
+    <!-- wp:columns {"className":"footer-widgets"} -->
+    <div class="wp-block-columns footer-widgets container">
+        <!-- wp:column {"className":"footer-branding"} -->
+        <div class="wp-block-column footer-branding">
+            <!-- wp:site-title {"level":2,"fontSize":"large"} /-->
+            <!-- wp:paragraph -->
+            <p>
+                Expert shoe repair and customization services. Bringing new life
+                to your favorite footwear.
+            </p>
+            <!-- /wp:paragraph -->
+            <!-- wp:social-links {"iconColor":"primary","iconColorValue":"#333333","size":"has-normal-icon-size","className":"is-style-logos-only"} -->
+            <ul
+                class="wp-block-social-links has-normal-icon-size has-icon-color is-style-logos-only"
+            >
+                <!-- wp:social-link {"url":"#","service":"instagram"} /-->
+                <!-- wp:social-link {"url":"#","service":"facebook"} /-->
+                <!-- wp:social-link {"url":"#","service":"twitter"} /-->
+            </ul>
+            <!-- /wp:social-links -->
+        </div>
+        <!-- /wp:column -->
+
+        <!-- wp:column {"className":"footer-nav"} -->
+        <div class="wp-block-column footer-nav">
+            <!-- wp:heading {"level":3,"fontSize":"medium"} -->
+            <h3 class="has-medium-font-size">Quick Links</h3>
+            <!-- /wp:heading -->
+            <!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"}} /-->
+        </div>
+        <!-- /wp:column -->
+
+        <!-- wp:column {"className":"footer-services"} -->
+        <div class="wp-block-column footer-services">
+            <!-- wp:heading {"level":3,"fontSize":"medium"} -->
+            <h3 class="has-medium-font-size">Services</h3>
+            <!-- /wp:heading -->
+            <!-- wp:list -->
+            <ul>
+                <li>Shoe Repair</li>
+                <li>Cleaning & Restoration</li>
+                <li>Custom Design</li>
+                <li>Color Matching</li>
+            </ul>
+            <!-- /wp:list -->
+        </div>
+        <!-- /wp:column -->
+
+        <!-- wp:column {"className":"footer-contact"} -->
+        <div class="wp-block-column footer-contact">
+            <!-- wp:heading {"level":3,"fontSize":"medium"} -->
+            <h3 class="has-medium-font-size">Contact</h3>
+            <!-- /wp:heading -->
+            <!-- wp:paragraph -->
+            <p>
+                📍 Your Location<br />
+                📱 (555) 123-4567<br />
+                ✉️ contact@yoursite.com
+            </p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:column -->
+    </div>
+    <!-- /wp:columns -->
+
+    <!-- wp:separator {"backgroundColor":"secondary","className":"is-style-wide"} -->
+    <hr
+        class="wp-block-separator has-text-color has-secondary-color has-alpha-channel-opacity has-secondary-background-color has-background is-style-wide"
+    />
+    <!-- /wp:separator -->
+
+    <!-- wp:group {"className":"footer-bottom","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
+    <div class="wp-block-group footer-bottom">
+        <!-- wp:paragraph {"fontSize":"small"} -->
+        <p class="has-small-font-size">
+            © 2024 Your Site Name. All rights reserved.
+        </p>
+        <!-- /wp:paragraph -->
+        <!-- wp:paragraph {"fontSize":"small"} -->
+        <p class="has-small-font-size">
+            <a href="/privacy-policy">Privacy Policy</a> •
+            <a href="/terms">Terms of Service</a>
+        </p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+</footer>
 <!-- /wp:group -->
