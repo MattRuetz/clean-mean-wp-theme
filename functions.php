@@ -5,6 +5,10 @@ if (!defined('ABSPATH'))
 // Theme Setup
 function cleanmean_setup()
 {
+    // Add support for block templates
+    add_theme_support('block-templates');
+    add_theme_support('block-template-parts');
+
     // Add default posts and comments RSS feed links
     add_theme_support('automatic-feed-links');
 
