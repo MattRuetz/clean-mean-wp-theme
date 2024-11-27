@@ -137,4 +137,129 @@ function cleanmean_register_patterns()
 }
 add_action('init', 'cleanmean_register_patterns');
 
-// Add this after your cleanmean_setup function
+
+// Expandable theme optimizations
+
+// Here is where the theme checks which patterns are being used on the current
+// page, and generates a dynamic css file for the page.
+
+function get_current_template_content()
+{
+    // Get the currently assigned template
+    $current_template = get_page_template_slug();
+
+    if ($current_template) {
+        error_log('CleanMean: Current template from WP: ' . $current_template);
+        // Convert the template filename to our HTML version
+        $template_path = str_replace('.php', '.html', $current_template);
+        $full_path = get_template_directory() . '/templates/' . basename($template_path);
+
+        if (file_exists($full_path)) {
+            error_log('CleanMean: Loading template from: ' . $full_path);
+            return file_get_contents($full_path);
+        }
+    }
+
+    // Fallback to template hierarchy
+    // if (is_front_page() && file_exists(get_template_directory() . '/templates/home-page.html')) {
+    //     return file_get_contents(get_template_directory() . '/templates/home-page.html');
+    // } elseif (is_single() && file_exists(get_template_directory() . '/templates/single.html')) {
+    //     return file_get_contents(get_template_directory() . '/templates/single.html');
+    // } elseif (is_page() && file_exists(get_template_directory() . '/templates/page.html')) {
+    //     return file_get_contents(get_template_directory() . '/templates/page.html');
+    // } elseif (file_exists(get_template_directory() . '/templates/index.html')) {
+    //     return file_get_contents(get_template_directory() . '/templates/index.html');
+    // }
+
+    return '';
+}
+
+function cleanmean_enqueue_pattern_styles()
+{
+    static $already_run = false;
+
+    // Only run once per page load
+    if ($already_run) {
+        return;
+    }
+
+    global $post;
+    if (!$post) return;
+
+    $template_content = get_current_template_content();
+    $content = $post->post_content;
+    $full_content = $template_content . $content;
+
+    error_log('CleanMean: Full content: ' . $full_content);
+
+    // Find all pattern references in the content
+    preg_match_all('/"slug":"cleanmean\/([^"]+)"/', $full_content, $matches);
+
+    if (!empty($matches[1])) {
+        $patterns = array_unique($matches[1]); // Remove duplicates
+        $combined_css = '';
+
+        foreach ($patterns as $pattern) {
+            $css_file = '/assets/css/patterns/' . $pattern . '.css';
+            $full_css_path = get_template_directory() . $css_file;
+
+            if (file_exists($full_css_path)) {
+                $css_content = file_get_contents($full_css_path);
+                $combined_css .= "/* Pattern: {$pattern} */\n";
+                $combined_css .= $css_content . "\n\n";
+                error_log('CleanMean: Added CSS for pattern: ' . $pattern);
+            }
+        }
+
+        if (!empty($combined_css)) {
+            // Generate a unique hash for this combination of patterns
+            // $css_hash = md5(implode(',', $patterns));
+
+            // Create cache directory if it doesn't exist
+            // $cache_dir = get_template_directory() . '/assets/cache';
+            // if (!file_exists($cache_dir)) {
+            //     mkdir($cache_dir, 0755, true);
+            // }
+
+            // Cache file path
+            // $cache_file = $cache_dir . '/patterns-' . $css_hash . '.css';
+            // $cache_url = get_template_directory_uri() . '/assets/cache/patterns-' . $css_hash . '.css';
+
+            // Only write the file if it doesn't exist
+            // if (!file_exists($cache_file)) {
+            //     file_put_contents($cache_file, $combined_css);
+            //     error_log('CleanMean: Created new cached CSS file: ' . $cache_file);
+            // }
+
+            // Register a dummy stylesheet handle
+            wp_register_style('cleanmean-patterns', false);
+            wp_enqueue_style('cleanmean-patterns');
+
+            // Add the actual CSS as inline styles
+            wp_add_inline_style('cleanmean-patterns', $combined_css);
+
+            error_log('CleanMean: Enqueued combined CSS directly for development.');
+        }
+    }
+
+    $already_run = true;
+}
+add_action('wp_enqueue_scripts', 'cleanmean_enqueue_pattern_styles');
+
+// Add a function to clean up old cache files (optional)
+function cleanmean_cleanup_css_cache()
+{
+    $cache_dir = get_template_directory() . '/assets/cache';
+    if (!is_dir($cache_dir)) return;
+
+    $files = glob($cache_dir . '/patterns-*.css');
+    $expired = time() - (7 * 24 * 60 * 60); // 7 days
+
+    foreach ($files as $file) {
+        if (filemtime($file) < $expired) {
+            unlink($file);
+            error_log('CleanMean: Removed expired CSS cache file: ' . $file);
+        }
+    }
+}
+add_action('wp_scheduled_delete', 'cleanmean_cleanup_css_cache');

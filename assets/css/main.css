@@ -101,20 +101,6 @@ h1.wp-block-post-title {
     height: auto;
 }
 
-/* Home Page Styles */
-.hero-section {
-    text-align: center;
-    color: #ffffff;
-}
-
-.hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.services-section {
-    background-color: var(--background-color);
-}
 
 .about-section {
     background-color: var(--background-color);

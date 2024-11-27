@@ -1,0 +1,49 @@
+# Theme specific
+/assets/cache/*
+!/assets/cache/.gitkeep
+
+# WordPress core files
+wp-config.php
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/cache/
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+
+# Development files
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+*.sql
+*.sqlite
+.sass-cache/
+*.css.map
+*.js.map
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.project
+.settings/
+*.swp
+*.swo
+*~
+
+# Package manager files
+yarn-error.log
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# Build process
+/dist/
+/build/
+.tmp/
