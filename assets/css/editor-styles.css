@@ -1,0 +1,28 @@
+/* Editor Styles */
+:root {
+    --primary-color: #333;
+    --secondary-color: #666;
+    --background-color: #fafafa;
+    --light-text-color: #fafafa;
+    --dark-background-color: #010101;
+    --spacing-unit: 1rem;
+}
+
+.editor-styles-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: var(--primary-color);
+}
+
+/* Import your pattern styles */
+.km-hero {
+    padding: 6rem 0;
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-unit);
+}
+
+/* Add other pattern styles as needed */ 

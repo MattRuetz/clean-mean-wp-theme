@@ -39,8 +39,13 @@ ul {
     padding: 0 var(--spacing-unit);
 }
 
-.narrow-container {
-    max-width: 800px;
+.floating-section {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1400px;
+    border-radius: 1rem;
+    border: 1px solid var(--primary-color);
+    padding: var(--spacing-unit);
 }
 
 /* Header Styles */

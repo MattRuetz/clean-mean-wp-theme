@@ -47,6 +47,32 @@ function cleanmean_setup()
         'rewrite' => array('slug' => 'projects'),
         'show_in_rest' => true,
     ));
+
+    // Add support for block styles
+    add_theme_support('wp-block-styles');
+
+    // Add support for responsive embeds
+    add_theme_support('responsive-embeds');
+
+    // Add support for editor styles
+    add_theme_support('editor-styles');
+
+    // Add support for wide alignments
+    add_theme_support('align-wide');
+
+    // Add custom colors to block editor
+    add_theme_support('editor-color-palette', array(
+        array(
+            'name'  => __('Primary', 'cleanmean'),
+            'slug'  => 'primary',
+            'color' => 'var(--primary-color)',
+        ),
+        array(
+            'name'  => __('Secondary', 'cleanmean'),
+            'slug'  => 'secondary',
+            'color' => 'var(--secondary-color)',
+        ),
+    ));
 }
 add_action('after_setup_theme', 'cleanmean_setup');
 
@@ -69,10 +95,25 @@ function cleanmean_scripts()
 add_action('wp_enqueue_scripts', 'cleanmean_scripts');
 
 // Register block patterns
+function cleanmean_clean_pattern_content($content)
+{
+    // Remove extra whitespace between tags
+    $content = preg_replace('/>\s+</', '><', $content);
+    // Remove whitespace at the start and end of lines
+    $content = preg_replace('/^\s+|\s+$/m', '', $content);
+    // Remove empty lines
+    $content = preg_replace('/\n\s*\n/', "\n", $content);
+    return $content;
+}
+
 function cleanmean_register_patterns()
 {
     register_block_pattern_category('cleanmean', array(
         'label' => __('CleanMean', 'cleanmean')
+    ));
+
+    register_block_pattern_category('kutshoe-motto', array(
+        'label' => __('Kutshoe Motto', 'kutshoe-motto')
     ));
 
     register_block_pattern(
@@ -81,7 +122,7 @@ function cleanmean_register_patterns()
             'title'       => __('Simple Hero Section', 'cleanmean'),
             'description' => __('A full-width single-column hero section with heading, subheading, and call-to-action button', 'cleanmean'),
             'categories'  => array('cleanmean', 'featured', 'header'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/simple-hero.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/simple-hero.html'))
         )
     );
 
@@ -91,7 +132,7 @@ function cleanmean_register_patterns()
             'title'       => __('Services Cards 3', 'cleanmean'),
             'description' => __('A three-column services section', 'cleanmean'),
             'categories'  => array('cleanmean', 'services'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/services-cards-3.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/services-cards-3.html'))
         )
     );
 
@@ -101,7 +142,7 @@ function cleanmean_register_patterns()
             'title'       => __('Featured Projects', 'cleanmean'),
             'description' => __('A grid of featured projects', 'cleanmean'),
             'categories'  => array('cleanmean', 'featured'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/featured-projects.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/featured-projects.html'))
         )
     );
 
@@ -111,7 +152,7 @@ function cleanmean_register_patterns()
             'title'       => __('Simple CTA', 'cleanmean'),
             'description' => __('A simple call-to-action section', 'cleanmean'),
             'categories'  => array('cleanmean', 'cta'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/simple-cta.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/simple-cta.html'))
         )
     );
 
@@ -121,7 +162,7 @@ function cleanmean_register_patterns()
             'title'       => __('Simple Page Heading', 'cleanmean'),
             'description' => __('A simple page heading', 'cleanmean'),
             'categories'  => array('cleanmean', 'heading'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/simple-page-heading.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/simple-page-heading.html'))
         )
     );
 
@@ -131,7 +172,7 @@ function cleanmean_register_patterns()
             'title'       => __('Simple Contact Area', 'cleanmean'),
             'description' => __('A simple contact area', 'cleanmean'),
             'categories'  => array('cleanmean', 'contact'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/simple-contact-area.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/simple-contact-area.html'))
         )
     );
 
@@ -141,7 +182,7 @@ function cleanmean_register_patterns()
             'title'       => __('Before & After Gallery', 'cleanmean'),
             'description' => __('A gallery showing before and after transformations', 'cleanmean'),
             'categories'  => array('cleanmean', 'gallery'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/before-after-gallery.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/before-after-gallery.html'))
         )
     );
 
@@ -151,7 +192,17 @@ function cleanmean_register_patterns()
             'title'       => __('Process Steps', 'cleanmean'),
             'description' => __('A section showing step-by-step process', 'cleanmean'),
             'categories'  => array('cleanmean', 'features'),
-            'content'     => file_get_contents(get_template_directory() . '/patterns/process-steps.html')
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/process-steps.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-hero',
+        array(
+            'title'       => __('Kutshoe Motto Hero', 'cleanmean'),
+            'description' => __('A hero section for the Kutshoe Motto', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto', 'hero'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-hero.html'))
         )
     );
 }
@@ -226,6 +277,7 @@ function cleanmean_enqueue_pattern_styles()
     if (!empty($patterns)) {
         $combined_css = '';
         foreach ($patterns as $pattern) {
+            // Convert pattern path to CSS path
             $css_file = '/assets/css/patterns/' . $pattern . '.css';
             $full_css_path = get_template_directory() . $css_file;
 
@@ -234,6 +286,8 @@ function cleanmean_enqueue_pattern_styles()
                 $combined_css .= "/* Pattern: {$pattern} */\n";
                 $combined_css .= $css_content . "\n\n";
                 error_log('CleanMean: Added CSS for pattern: ' . $pattern);
+            } else {
+                error_log('CleanMean: CSS file not found: ' . $full_css_path);
             }
         }
 
@@ -287,3 +341,15 @@ function cleanmean_cleanup_css_cache()
     }
 }
 add_action('wp_scheduled_delete', 'cleanmean_cleanup_css_cache');
+
+function cleanmean_enqueue_editor_assets()
+{
+    add_editor_style('assets/css/editor-styles.css');
+}
+add_action('admin_init', 'cleanmean_enqueue_editor_assets');
+
+function cleanmean_verify_setup()
+{
+    error_log('CleanMean: Theme setup running');
+}
+add_action('after_setup_theme', 'cleanmean_verify_setup');
