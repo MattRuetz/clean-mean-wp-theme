@@ -1,7 +1,7 @@
 .km-hero {
     padding: 6rem 0;
-    background-color: var(--background-color);
-    border: 1px solid var(--primary-color);
+    background-color: var(--background);
+    border: 2px solid var(--primary);
 }
 
 .km-hero-container {
@@ -23,17 +23,24 @@
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    color: var(--primary);
+}
+
+
+.km-hero-name {
+    font-size: 1.5rem;
+    color: crimson;
+    margin-bottom: 0.5rem;
 }
 
 .km-separator {
-    color: var(--secondary-color);
+    color: var(--secondary);
     margin: 0 0.5rem;
 }
 
 .km-hero-subtitle {
     font-size: 1.25rem;
-    color: var(--secondary-color);
+    color: var(--secondary);
     margin-bottom: 2rem;
 }
 

@@ -6,23 +6,66 @@
                 {
                     "name": "Primary",
                     "slug": "primary",
-                    "color": "#333333"
+                    "color": "#272932"
                 },
                 {
                     "name": "Secondary",
                     "slug": "secondary",
-                    "color": "#666666"
+                    "color": "#6a7a8a"
                 },
                 {
                     "name": "Background",
                     "slug": "background",
-                    "color": "#fafafa"
+                    "color": "#FFF8E7"
+                },
+                {
+                    "name": "Background 2",
+                    "slug": "background-2",
+                    "color": "#ACCBE1"
+                },
+                {
+                    "name": "Accent",
+                    "slug": "accent",
+                    "color": "#D00000"
                 }
-            ]
-        },
-        "layout": {
-            "contentSize": "100%",
-            "wideSize": "100%"
+            ],
+            "custom": true,
+            "customDuotone": true,
+            "customGradient": true,
+            "link": true
+        }
+    },
+    "customTemplates": {
+        "color": {
+            "palette": {
+                "theme": [
+                    {
+                        "name": "Primary",
+                        "slug": "primary",
+                        "color": "#272932"
+                    },
+                    {
+                        "name": "Secondary",
+                        "slug": "secondary",
+                        "color": "#6a7a8a"
+                    },
+                    {
+                        "name": "Background",
+                        "slug": "background",
+                        "color": "#FFF8E7"
+                    },
+                    {
+                        "name": "Background 2",
+                        "slug": "background-2",
+                        "color": "#ACCBE1"
+                    },
+                    {
+                        "name": "Accent",
+                        "slug": "accent",
+                        "color": "#D00000"
+                    }
+                ]
+            }
         }
     }
 }

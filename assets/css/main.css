@@ -1,10 +1,10 @@
 /* Base Styles */
 :root {
-    --primary-color: #333;
-    --secondary-color: #666;
-    --background-color: #fafafa;
-    --light-text-color: #fafafa;
-    --dark-background-color: #010101;
+    --primary: var(--wp--preset--color--primary);
+    --secondary: var(--wp--preset--color--secondary);
+    --background: var(--wp--preset--color--background);
+    --background-2: var(--wp--preset--color--background-2);
+    --accent: var(--wp--preset--color--accent);
     --spacing-unit: 1rem;
 }
 
@@ -13,8 +13,8 @@ body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     line-height: 1.6;
-    color: var(--primary-color);
-    background-color: var(--background-color);
+    color: var(--primary);
+    background-color: var(--background);
 }
 
 ul {
@@ -44,7 +44,7 @@ ul {
     width: 90%;
     max-width: 1400px;
     border-radius: 1rem;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--primary);
     padding: var(--spacing-unit);
 }
 
@@ -68,7 +68,7 @@ h1.wp-block-post-title {
 }
 
 .site-title a {
-    color: var(--primary-color);
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -108,11 +108,11 @@ h1.wp-block-post-title {
 
 
 .about-section {
-    background-color: var(--background-color);
+    background-color: var(--background);
 }
 
 .contact-cta {
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     color: #ffffff;
     text-align: center;
     padding: 4rem 0;
@@ -120,5 +120,5 @@ h1.wp-block-post-title {
 
 .contact-cta .wp-block-button__link {
     background-color: #ffffff;
-    color: var(--primary-color);
+    color: var(--primary);
 }

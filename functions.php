@@ -91,6 +91,7 @@ function cleanmean_scripts()
 
     // Your existing JS enqueue
     wp_enqueue_script('cleanmean-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
+    wp_enqueue_script('cleanmean-km-tabs', get_template_directory_uri() . '/assets/js/km-tabs.js', array(), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'cleanmean_scripts');
 
@@ -203,6 +204,52 @@ function cleanmean_register_patterns()
             'description' => __('A hero section for the Kutshoe Motto', 'cleanmean'),
             'categories'  => array('cleanmean', 'kutshoe-motto', 'hero'),
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-hero.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-tabs',
+        array(
+            'title'       => __('Kutshoe Motto Tabs', 'cleanmean'),
+            'description' => __('A tabs section for the Kutshoe Motto', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto', 'tabs'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-tabs.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-offer',
+        array(
+            'title'       => __('Kutshoe Motto Offer', 'cleanmean'),
+            'description' => __('A promotional offer section for Kutshoe Motto', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto', 'cta'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-offer.html'))
+        )
+    );
+
+    $img_right_content = file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-img-right.html');
+    $img_right_content = str_replace('<?php echo get_template_directory_uri(); ?>', get_template_directory_uri(), $img_right_content);
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-img-right',
+        array(
+            'title'       => __('Kutshoe Motto Image Right', 'cleanmean'),
+            'description' => __('A section with text on the left and image on the right', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content($img_right_content)
+        )
+    );
+
+    $img_left_content = file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-img-left.html');
+    $img_left_content = str_replace('<?php echo get_template_directory_uri(); ?>', get_template_directory_uri(), $img_left_content);
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-img-left',
+        array(
+            'title'       => __('Kutshoe Motto Image Left', 'cleanmean'),
+            'description' => __('A section with image on the left and text on the right', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content($img_left_content)
         )
     );
 }
