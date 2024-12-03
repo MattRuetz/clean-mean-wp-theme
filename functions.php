@@ -134,6 +134,26 @@ function cleanmean_register_patterns()
             'content'     => file_get_contents(get_template_directory() . '/patterns/simple-contact-area.html')
         )
     );
+
+    register_block_pattern(
+        'cleanmean/before-after-gallery',
+        array(
+            'title'       => __('Before & After Gallery', 'cleanmean'),
+            'description' => __('A gallery showing before and after transformations', 'cleanmean'),
+            'categories'  => array('cleanmean', 'gallery'),
+            'content'     => file_get_contents(get_template_directory() . '/patterns/before-after-gallery.html')
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/process-steps',
+        array(
+            'title'       => __('Process Steps', 'cleanmean'),
+            'description' => __('A section showing step-by-step process', 'cleanmean'),
+            'categories'  => array('cleanmean', 'features'),
+            'content'     => file_get_contents(get_template_directory() . '/patterns/process-steps.html')
+        )
+    );
 }
 add_action('init', 'cleanmean_register_patterns');
 
@@ -177,11 +197,7 @@ function get_current_template_content()
 function cleanmean_enqueue_pattern_styles()
 {
     static $already_run = false;
-
-    // Only run once per page load
-    if ($already_run) {
-        return;
-    }
+    if ($already_run) return;
 
     global $post;
     if (!$post) return;
@@ -190,15 +206,25 @@ function cleanmean_enqueue_pattern_styles()
     $content = $post->post_content;
     $full_content = $template_content . $content;
 
-    error_log('CleanMean: Full content: ' . $full_content);
+    // Find both pattern references AND transformed patterns with metadata
+    $patterns = array();
 
-    // Find all pattern references in the content
+    // Look for direct pattern references
     preg_match_all('/"slug":"cleanmean\/([^"]+)"/', $full_content, $matches);
-
     if (!empty($matches[1])) {
-        $patterns = array_unique($matches[1]); // Remove duplicates
-        $combined_css = '';
+        $patterns = array_merge($patterns, $matches[1]);
+    }
 
+    // Look for transformed patterns with metadata
+    preg_match_all('/"patternName":"cleanmean\/([^"]+)"/', $full_content, $metadata_matches);
+    if (!empty($metadata_matches[1])) {
+        $patterns = array_merge($patterns, $metadata_matches[1]);
+    }
+
+    $patterns = array_unique($patterns); // Remove duplicates
+
+    if (!empty($patterns)) {
+        $combined_css = '';
         foreach ($patterns as $pattern) {
             $css_file = '/assets/css/patterns/' . $pattern . '.css';
             $full_css_path = get_template_directory() . $css_file;
@@ -237,8 +263,6 @@ function cleanmean_enqueue_pattern_styles()
 
             // Add the actual CSS as inline styles
             wp_add_inline_style('cleanmean-patterns', $combined_css);
-
-            error_log('CleanMean: Enqueued combined CSS directly for development.');
         }
     }
 
