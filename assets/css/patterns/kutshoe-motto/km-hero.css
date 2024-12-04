@@ -5,7 +5,7 @@
 }
 
 .km-hero-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -20,7 +20,7 @@
 }
 
 .km-hero-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--primary);
@@ -28,7 +28,7 @@
 
 
 .km-hero-name {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: crimson;
     margin-bottom: 0.5rem;
 }
@@ -39,7 +39,7 @@
 }
 
 .km-hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: var(--secondary);
     margin-bottom: 2rem;
 }
@@ -57,7 +57,7 @@
 
 .km-hero-image img {
     width: 100%;
-    height: auto;
+    height: 350px;
     display: block;
     transition: transform 0.3s ease;
     border-radius: 1rem;
