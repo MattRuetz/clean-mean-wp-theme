@@ -1,0 +1,42 @@
+.km-header {
+    background-color: var(--background);
+    padding: 1rem 0;
+}
+
+.km-title-inner {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--accent);
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+.km-nav {
+    margin: 0;
+    font-size: 1.25rem;
+    gap: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.km-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 3rem;
+}
+
+.km-nav .current-menu-item {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--accent);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
