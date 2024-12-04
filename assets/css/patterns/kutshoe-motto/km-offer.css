@@ -11,15 +11,15 @@
     background-size: 20px;
     background-blend-mode: soft-light;
     border: 2px solid var(--primary);
-    border-radius: 1rem;
+    /* border-radius: 100rem; */
 }
 
 .km-offer-container {
     background-color: var(--background);
     margin: 0 auto;
     padding: 3rem;
-    /* border: 2px solid var(--primary); */
-    border-radius: 1rem;
+    border: 2px solid var(--primary);
+    /* border-radius: 100rem; */
     text-align: center;
 }
 
@@ -43,7 +43,7 @@
     letter-spacing: 0.1em;
     font-size: 1.25rem;
     padding: 1rem 2rem;
-    border-radius: 5rem;
+    /* border-radius: 5rem; */
     transition: transform 0.3s ease;
 }
 

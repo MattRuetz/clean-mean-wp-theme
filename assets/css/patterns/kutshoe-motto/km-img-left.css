@@ -12,10 +12,13 @@
 .km-img-left-columns {
     align-items: center;
     gap: 4rem;
+    justify-content: space-between;
 }
 
 .km-img-left-content {
+    align-self: center;
     padding-left: 2rem;
+    max-width: 600px;
 }
 
 .km-img-left-title {
@@ -28,7 +31,6 @@
 .km-img-left p {
     color: var(--secondary);
     line-height: 1.6;
-    font-size: 1.125rem;
 }
 
 @media (max-width: 781px) {
@@ -37,7 +39,7 @@
     }
 
     .km-img-left-columns {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 2rem;
     }
 

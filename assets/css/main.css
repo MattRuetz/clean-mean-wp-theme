@@ -15,6 +15,7 @@ body {
     line-height: 1.6;
     color: var(--primary);
     background-color: var(--background);
+    font-size: 18px;
 }
 
 ul {
@@ -25,25 +26,32 @@ ul {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-unit);
+    width: 90%;
 }
 
 .container-wide {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--spacing-unit);
+    width: 90%;
 }
 
 .container-narrow {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 var(--spacing-unit);
+    width: 90%;
+}
+
+.tight-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .floating-section {
     margin: 0 auto;
     width: 90%;
     max-width: 1400px;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
     border: 1px solid var(--primary);
     padding: var(--spacing-unit);
 }

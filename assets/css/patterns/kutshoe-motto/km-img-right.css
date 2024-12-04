@@ -11,11 +11,14 @@
 
 .km-img-right-columns {
     align-items: center;
+    justify-content: space-between;
     gap: 4rem;
 }
 
 .km-img-right-content {
+    align-self: center;
     padding-right: 2rem;
+    max-width: 600px;
 }
 
 .km-img-right-title {
@@ -28,7 +31,6 @@
 .km-img-right p {
     color: var(--secondary);
     line-height: 1.6;
-    font-size: 1.125rem;
 }
 
 @media (max-width: 781px) {

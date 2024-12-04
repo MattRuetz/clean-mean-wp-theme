@@ -12,7 +12,7 @@
     text-align: center;
     padding: 2rem;
     background: var(--background-color);
-    border-radius: 8px;
+    /* border-radius: 8px; */
     position: relative;
 }
 
@@ -21,7 +21,7 @@
     height: 40px;
     background: var(--primary-color);
     color: white;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     display: flex;
     align-items: center;
     justify-content: center;
