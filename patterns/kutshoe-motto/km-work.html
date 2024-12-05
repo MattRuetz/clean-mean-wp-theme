@@ -1,0 +1,30 @@
+<!-- wp:group {"className":"km-work","layout":{"type":"constrained"}} -->
+<div class="wp-block-group km-work">
+    <!-- wp:group {"className":"km-work-hero"} -->
+    <div class="wp-block-group km-work-hero">
+        <!-- wp:heading {"level":1,"className":"km-work-title"} -->
+        <h1 class="wp-block-heading km-work-title">Our Work</h1>
+        <!-- /wp:heading -->
+        <!-- wp:paragraph {"className":"km-work-subtitle"} -->
+        <p class="km-work-subtitle">
+            Browse through our portfolio of transformations
+        </p>
+        <!-- /wp:paragraph -->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:query {"queryId":1,"query":{"postType":"project","postsPerPage":12,"orderby":"date","order":"desc"},"className":"km-work-grid container"} -->
+    <div class="wp-block-query km-work-grid container">
+        <!-- wp:post-template {"layout":{"type":"grid","columnCount":2}} -->
+        <!-- wp:km/project-card /-->
+        <!-- /wp:post-template -->
+
+        <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+        <!-- wp:query-pagination-previous /-->
+        <!-- wp:query-pagination-numbers /-->
+        <!-- wp:query-pagination-next /-->
+        <!-- /wp:query-pagination -->
+    </div>
+    <!-- /wp:query -->
+</div>
+<!-- /wp:group -->

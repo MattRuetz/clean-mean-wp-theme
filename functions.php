@@ -51,6 +51,10 @@ function cleanmean_setup()
     // Add support for block styles
     add_theme_support('wp-block-styles');
 
+    // Add support for block templates
+    add_theme_support('block-templates');
+
+
     // Add support for responsive embeds
     add_theme_support('responsive-embeds');
 
@@ -252,6 +256,46 @@ function cleanmean_register_patterns()
             'content'     => cleanmean_clean_pattern_content($img_left_content)
         )
     );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-marquee',
+        array(
+            'title'       => __('Kutshoe Motto Marquee', 'cleanmean'),
+            'description' => __('A scrolling marquee with company name', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-marquee.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-contact',
+        array(
+            'title'       => __('KM Contact Section', 'cleanmean'),
+            'description' => __('Contact section with form and business information', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-contact.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-services',
+        array(
+            'title'       => __('KM Services Page', 'cleanmean'),
+            'description' => __('Full services page layout with all service offerings', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-services.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-work',
+        array(
+            'title'       => __('KM Work Archive', 'cleanmean'),
+            'description' => __('Archive page for displaying project transformations', 'cleanmean'),
+            'categories'  => array('cleanmean', 'kutshoe-motto'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-work.html'))
+        )
+    );
 }
 add_action('init', 'cleanmean_register_patterns');
 
@@ -267,13 +311,13 @@ function get_current_template_content()
     $current_template = get_page_template_slug();
 
     if ($current_template) {
-        error_log('CleanMean: Current template from WP: ' . $current_template);
+        // error_log('CleanMean: Current template from WP: ' . $current_template);
         // Convert the template filename to our HTML version
         $template_path = str_replace('.php', '.html', $current_template);
         $full_path = get_template_directory() . '/templates/' . basename($template_path);
 
         if (file_exists($full_path)) {
-            error_log('CleanMean: Loading template from: ' . $full_path);
+            // error_log('CleanMean: Loading template from: ' . $full_path);
             return file_get_contents($full_path);
         }
     }
@@ -332,9 +376,9 @@ function cleanmean_enqueue_pattern_styles()
                 $css_content = file_get_contents($full_css_path);
                 $combined_css .= "/* Pattern: {$pattern} */\n";
                 $combined_css .= $css_content . "\n\n";
-                error_log('CleanMean: Added CSS for pattern: ' . $pattern);
+                // error_log('CleanMean: Added CSS for pattern: ' . $pattern);
             } else {
-                error_log('CleanMean: CSS file not found: ' . $full_css_path);
+                // error_log('CleanMean: CSS file not found: ' . $full_css_path);
             }
         }
 
@@ -383,7 +427,7 @@ function cleanmean_cleanup_css_cache()
     foreach ($files as $file) {
         if (filemtime($file) < $expired) {
             unlink($file);
-            error_log('CleanMean: Removed expired CSS cache file: ' . $file);
+            // error_log('CleanMean: Removed expired CSS cache file: ' . $file);
         }
     }
 }
@@ -397,6 +441,58 @@ add_action('admin_init', 'cleanmean_enqueue_editor_assets');
 
 function cleanmean_verify_setup()
 {
-    error_log('CleanMean: Theme setup running');
+    // error_log('CleanMean: Theme setup running');
 }
 add_action('after_setup_theme', 'cleanmean_verify_setup');
+
+function cleanmean_enqueue_archive_project_styles()
+{
+    if (is_post_type_archive('project')) {
+        wp_enqueue_style('archive-project', get_template_directory_uri() . '/assets/css/patterns/kutshoe-motto/km-work.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'cleanmean_enqueue_archive_project_styles');
+
+add_action('init', function () {
+    register_block_type(__DIR__ . '/blocks/project-card', [
+        'render_callback' => function ($attributes, $content, $block) {
+            // The template will now use ACF's get_field() if available, 
+            // falling back to get_post_meta if not
+            ob_start();
+            include __DIR__ . '/blocks/project-card/render.php';
+            return ob_get_clean();
+        }
+    ]);
+});
+
+// Add media uploader scripts
+add_action('admin_enqueue_scripts', function ($hook) {
+    if ('post.php' === $hook || 'post-new.php' === $hook) {
+        wp_enqueue_media();
+        wp_add_inline_script('jquery', '
+            jQuery(document).ready(function($) {
+                $(".upload-image-button").click(function(e) {
+                    e.preventDefault();
+                    var button = $(this);
+                    var input = button.siblings("input");
+                    
+                    var frame = wp.media({
+                        title: "Select or Upload Image",
+                        button: {
+                            text: "Use this image"
+                        },
+                        multiple: false
+                    });
+
+                    frame.on("select", function() {
+                        var attachment = frame.state().get("selection").first().toJSON();
+                        input.val(attachment.id);
+                        button.siblings(".image-preview").attr("src", attachment.url);
+                    });
+
+                    frame.open();
+                });
+            });
+        ');
+    }
+});

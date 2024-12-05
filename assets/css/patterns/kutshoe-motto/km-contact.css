@@ -1,0 +1,114 @@
+.km-contact {
+    padding: 6rem 0;
+    background-color: var(--background);
+}
+
+.km-contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.km-contact-title {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.km-contact-subtitle {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 1.25rem;
+    margin-bottom: 4rem;
+}
+
+.km-contact-columns {
+    gap: 4rem;
+}
+
+.km-contact-card {
+    background-color: var(--background);
+    padding: 2rem;
+    border: 2px solid var(--primary);
+}
+
+.km-contact-card h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.km-contact-card h3:first-child {
+    margin-top: 0;
+}
+
+.km-contact-card p {
+    color: var(--secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form-container {
+    background-color: var(--background);
+    padding: 2rem;
+    border: 2px solid var(--primary);
+}
+
+/* Contact Form 7 Styling */
+.wpcf7-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--primary);
+    background-color: var(--background);
+    color: var(--primary);
+}
+
+.wpcf7-form textarea {
+    min-height: 150px;
+}
+
+.wpcf7-submit {
+    background-color: var(--primary);
+    color: var(--background);
+    padding: 1rem 2rem;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.wpcf7-submit:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 781px) {
+    .km-contact {
+        padding: 4rem 0;
+    }
+
+    .km-contact-columns {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .km-contact-info,
+    .km-contact-form {
+        flex-basis: 100% !important;
+    }
+
+    .km-contact-title {
+        font-size: 2.5rem;
+    }
+} 

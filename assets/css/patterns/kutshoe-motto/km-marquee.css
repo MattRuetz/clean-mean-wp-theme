@@ -1,0 +1,40 @@
+.km-marquee {
+    padding: 1rem 0;
+    background: var(--primary);
+    color: var(--background);
+    overflow: hidden;
+}
+
+.km-marquee-container {
+    display: flex;
+    width: 100%;
+}
+
+.km-marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    animation: scroll 30s linear infinite;
+}
+
+.km-marquee-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 0 2rem;
+    white-space: nowrap;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pause animation on hover */
+.km-marquee-container:hover .km-marquee-content {
+    animation-play-state: paused;
+} 

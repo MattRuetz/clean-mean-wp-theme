@@ -1,0 +1,22 @@
+{
+    "name": "km/project-card",
+    "title": "Project Card",
+    "description": "Displays a before/after project card",
+    "category": "theme",
+    "icon": "format-gallery",
+    "apiVersion": 2,
+    "supports": {
+        "html": false,
+        "anchor": true
+    },
+    "textdomain": "km",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "attributes": {
+        "data": {
+            "type": "object"
+        }
+    }
+}

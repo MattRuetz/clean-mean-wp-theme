@@ -1,0 +1,148 @@
+.km-work {
+    padding: 4rem 0;
+}
+
+.km-work-hero {
+    text-align: center;
+    padding: 2rem 0 4rem;
+}
+
+.km-work-title {
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.km-work-subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.km-work-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.km-project-card {
+    margin-bottom: 4rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.km-project-card:hover {
+    transform: translateY(-4px);
+}
+
+.km-before-after {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.before-image,
+.after-image {
+    flex: 1;
+    position: relative;
+}
+
+.before-image img,
+.after-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+.image-label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: var(--primary);
+    color: var(--background);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.km-project-info {
+    padding: 1.5rem;
+}
+
+.km-project-info h3 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0 0 1rem;
+}
+
+.km-project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.km-services-provided ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.km-services-provided li {
+    background: var(--background-alt);
+    color: var(--secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+.km-project-date {
+    color: var(--secondary);
+    font-size: 0.875rem;
+}
+
+.wp-block-query-pagination {
+    margin-top: 4rem;
+}
+
+.wp-block-query-pagination .page-numbers {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    margin: 0 0.25rem;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.wp-block-query-pagination .current {
+    background: var(--primary);
+    color: var(--background);
+    border-color: var(--primary);
+}
+
+@media (max-width: 781px) {
+    .km-work-title {
+        font-size: 2.5rem;
+    }
+
+    .km-before-after {
+        flex-direction: column;
+    }
+
+    .before-image img,
+    .after-image img {
+        height: 250px;
+    }
+
+    .km-project-meta {
+        flex-direction: column;
+    }
+} 
