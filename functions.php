@@ -304,6 +304,14 @@ function cleanmean_register_patterns()
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-offer-horizontal.html'))
         )
     );
+
+    register_block_pattern(
+        'cleanmean/kutshoe-motto/km-about',
+        array(
+            'title'       => __('KM About', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-about.html'))
+        )
+    );
 }
 add_action('init', 'cleanmean_register_patterns');
 
