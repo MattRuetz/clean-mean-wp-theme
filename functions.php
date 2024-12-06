@@ -475,3 +475,41 @@ add_action('init', function () {
         }
     ]);
 });
+
+// Include the render function
+include_once get_template_directory() . '/blocks/km-tabs/render.php';
+
+function register_km_tabs_block()
+{
+    if (!function_exists('register_block_type')) {
+        error_log('register_block_type function does not exist');
+        return;
+    }
+
+    $result = register_block_type(__DIR__ . '/blocks/km-tabs');
+    if (is_wp_error($result)) {
+        error_log('Failed to register km-tabs block: ' . $result->get_error_message());
+    } else {
+        error_log('Successfully registered km-tabs block');
+    }
+}
+add_action('init', 'register_km_tabs_block');
+
+// function debug_km_tabs_block()
+// {
+//     $registry = WP_Block_Type_Registry::get_instance();
+//     error_log('Registered blocks: ' . print_r($registry->get_all_registered(), true));
+// }
+// add_action('init', 'debug_km_tabs_block', 20);
+
+
+// function debug_block_json()
+// {
+//     $block_json_path = __DIR__ . '/blocks/km-tabs/block.json';
+//     error_log('Block JSON path: ' . $block_json_path);
+//     error_log('Block JSON exists: ' . (file_exists($block_json_path) ? 'yes' : 'no'));
+//     if (file_exists($block_json_path)) {
+//         error_log('Block JSON content: ' . file_get_contents($block_json_path));
+//     }
+// }
+// add_action('init', 'debug_block_json', 5);

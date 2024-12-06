@@ -83,7 +83,7 @@
 }
 
 .service-image img {
-    width: 100%;
+    width: 100% !important;
     height: 400px;
     object-fit: cover;
 }
@@ -108,4 +108,8 @@
     .service-image img {
         height: 300px;
     }
-} 
+
+    .km-service-section:nth-child(even) .wp-block-columns {
+        flex-direction: column-reverse;
+    }
+}
