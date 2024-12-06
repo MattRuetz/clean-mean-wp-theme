@@ -29,54 +29,57 @@ $after_url = is_array($after_image) ? ($after_image['url'] ?? $after_image[0]) :
 $before_alt = is_array($before_image) ? ($before_image['alt'] ?? '') : '';
 $after_alt = is_array($after_image) ? ($after_image['alt'] ?? '') : '';
 ?>
-
-<div class="km-project-card">
-    <div class="km-project-images">
-        <div class="km-before-after">
-            <figure class="before-image">
-                <?php if ($before_url): ?>
-                    <img
-                        src="<?php echo esc_url($before_url); ?>"
-                        alt="<?php echo esc_attr($before_alt); ?>" />
-                    <span class="image-label">Before</span>
-                <?php else: ?>
-                    <div style="background: #eee; padding: 20px;">No Before Image</div>
+<a href="<?php the_permalink(); ?>" style="text-decoration: none;">
+    <div class="km-project-card">
+        <div class="km-project-images">
+            <div class="km-before-after">
+                <figure class="before-image">
+                    <?php if ($before_url): ?>
+                        <img
+                            src="<?php echo esc_url($before_url); ?>"
+                            alt="<?php echo esc_attr($before_alt); ?>" />
+                        <span class="image-label">Before</span>
+                    <?php else: ?>
+                        <div style="background: #eee; padding: 20px;">No Before Image</div>
+                    <?php endif; ?>
+                </figure>
+                <figure class="after-image">
+                    <?php if ($after_url): ?>
+                        <img
+                            src="<?php echo esc_url($after_url); ?>"
+                            alt="<?php echo esc_attr($after_alt); ?>" />
+                        <span class="image-label">After</span>
+                    <?php else: ?>
+                        <div style="background: #eee; padding: 20px;">No After Image</div>
+                    <?php endif; ?>
+                </figure>
+            </div>
+        </div>
+        <div class="km-project-info">
+            <div class="km-project-title-date">
+                <h3 class="km-project-title">
+                    <?php the_title(); ?>
+                </h3>
+                <?php if ($date_complete): ?>
+                    <div class="km-project-date">
+                        <?php echo esc_html(date('F Y', strtotime($date_complete))); ?>
+                    </div>
                 <?php endif; ?>
-            </figure>
-            <figure class="after-image">
-                <?php if ($after_url): ?>
-                    <img
-                        src="<?php echo esc_url($after_url); ?>"
-                        alt="<?php echo esc_attr($after_alt); ?>" />
-                    <span class="image-label">After</span>
-                <?php else: ?>
-                    <div style="background: #eee; padding: 20px;">No After Image</div>
+            </div>
+            <div class="km-project-meta">
+                <?php if (!empty($services)): ?>
+                    <div class="km-services-provided">
+                        <ul>
+                            <?php
+                            $service_items = is_array($services) ? $services : explode("\n", $services);
+                            foreach ($service_items as $service):
+                            ?>
+                                <li><?php echo esc_html($service); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
                 <?php endif; ?>
-            </figure>
+            </div>
         </div>
     </div>
-    <div class="km-project-info">
-        <h3 class="km-project-title">
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </h3>
-        <div class="km-project-meta">
-            <?php if (!empty($services)): ?>
-                <div class="km-services-provided">
-                    <ul>
-                        <?php
-                        $service_items = is_array($services) ? $services : explode("\n", $services);
-                        foreach ($service_items as $service):
-                        ?>
-                            <li><?php echo esc_html($service); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-            <?php if ($date_complete): ?>
-                <div class="km-project-date">
-                    <?php echo esc_html(date('F Y', strtotime($date_complete))); ?>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>
+</a>

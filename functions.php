@@ -439,11 +439,6 @@ function cleanmean_enqueue_editor_assets()
 }
 add_action('admin_init', 'cleanmean_enqueue_editor_assets');
 
-function cleanmean_verify_setup()
-{
-    // error_log('CleanMean: Theme setup running');
-}
-add_action('after_setup_theme', 'cleanmean_verify_setup');
 
 function cleanmean_enqueue_archive_project_styles()
 {
@@ -463,36 +458,4 @@ add_action('init', function () {
             return ob_get_clean();
         }
     ]);
-});
-
-// Add media uploader scripts
-add_action('admin_enqueue_scripts', function ($hook) {
-    if ('post.php' === $hook || 'post-new.php' === $hook) {
-        wp_enqueue_media();
-        wp_add_inline_script('jquery', '
-            jQuery(document).ready(function($) {
-                $(".upload-image-button").click(function(e) {
-                    e.preventDefault();
-                    var button = $(this);
-                    var input = button.siblings("input");
-                    
-                    var frame = wp.media({
-                        title: "Select or Upload Image",
-                        button: {
-                            text: "Use this image"
-                        },
-                        multiple: false
-                    });
-
-                    frame.on("select", function() {
-                        var attachment = frame.state().get("selection").first().toJSON();
-                        input.val(attachment.id);
-                        button.siblings(".image-preview").attr("src", attachment.url);
-                    });
-
-                    frame.open();
-                });
-            });
-        ');
-    }
 });
