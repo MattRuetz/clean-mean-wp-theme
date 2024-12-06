@@ -35,8 +35,8 @@
 }
 
 .footer-nav a {
-    text-decoration: none;
-    color: var(--light-text-color);
+    color: var(--primary);
+    text-decoration: underline;
     transition: color 0.2s ease;
 }
 
@@ -68,13 +68,12 @@
 }
 
 .footer-bottom a {
-    color: var(--light-text-color);
-    text-decoration: none;
+    color: var(--primary);
     transition: color 0.2s ease;
 }
 
 .footer-bottom a:hover {
-    color: var(--secondary-color);
+    color: var(--secondary);
 }
 
 /* Responsive Adjustments */
