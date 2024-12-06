@@ -130,3 +130,19 @@ h1.wp-block-post-title {
     background-color: #ffffff;
     color: var(--primary);
 }
+
+
+/* KM Global Styles */
+.km-offer-button .wp-element-button {
+    background-color: var(--accent);
+    color: var(--background);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+    transition: transform 0.3s ease;
+}
+
+.km-offer-button .wp-element-button:hover {
+    transform: scale(1.05);
+}

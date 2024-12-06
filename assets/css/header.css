@@ -3,14 +3,9 @@
     padding: 1rem 0;
 }
 
-.km-title-inner {
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--accent);
-    position: relative;
-    z-index: 1;
-    display: inline-block;
+.km-title {
+    color: var(--primary) !important;
+    margin: 0;
 }
 
 .km-nav {
@@ -39,4 +34,57 @@
 .header-container {
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .km-header {
+        font-size: 1rem;
+    }
+
+    .km-nav ul {
+        gap: 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .km-header {
+        font-size: 1rem;
+    }
+
+    .wp-block-navigation__responsive-container {
+        background-color: var(--wp--preset--color--background, #fff) !important;
+    }
+
+    .wp-block-navigation__responsive-container-content {
+        padding: 2rem;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        gap: 1.5rem;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item {
+        font-size: 1.25rem;
+        padding: 0.75rem 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        padding: 1rem;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .wp-block-navigation__responsive-container-close svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .wp-block-navigation__responsive-container .current-menu-item {
+        font-weight: bold;
+        /* You can also add your site's accent color */
+        color: var(--wp--preset--color--primary, #000);
+    }
 }
