@@ -1,0 +1,139 @@
+.km-offer-horizontal {
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.km-offer-horizontal-container {
+    background-color: var(--background);
+    border: 4px solid var(--accent);
+    border-radius: 1rem;
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.km-offer-horizontal-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+.km-offer-horizontal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    pointer-events: none;
+}
+
+.km-offer-horizontal-title {
+    color: var(--primary);
+    font-size: 1.875rem;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.km-offer-discount {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+    padding: 0 0.2em;
+}
+
+.km-offer-discount::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2em;
+    background-color: var(--accent);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.km-offer-horizontal .wp-block-button__link {
+    padding: 1em 2em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.km-offer-horizontal .wp-block-button__link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.7s ease;
+}
+
+.km-offer-horizontal .wp-block-button__link:hover::before {
+    left: 100%;
+}
+
+@media (max-width: 781px) {
+    .km-offer-horizontal {
+        padding: 1rem;
+    }
+
+    .km-offer-horizontal-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .km-offer-horizontal-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .km-offer-horizontal .wp-block-button__link {
+        padding: 0.875em 1.75em;
+    }
+}
+
+/* Add a subtle animation for the discount text */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.km-offer-discount {
+    animation: pulse 2s infinite ease-in-out;
+    display: inline-block;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .km-offer-horizontal-container {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .km-offer-horizontal-container:hover {
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+} 

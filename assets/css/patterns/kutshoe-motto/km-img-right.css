@@ -3,6 +3,13 @@
     background-color: var(--background);
 }
 
+.km-large-emoji {
+    font-size: 6rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: left;
+}
+
 .km-img-right-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -25,6 +32,7 @@
     font-size: 3rem;
     line-height: 1.2;
     margin-bottom: 1.5rem;
+    margin-top: 0;
     color: var(--primary);
 }
 
@@ -58,5 +66,9 @@
 
     .km-img-right-title {
         font-size: 2rem;
+    }
+
+    .km-large-emoji {
+        font-size: 4rem !important;
     }
 }

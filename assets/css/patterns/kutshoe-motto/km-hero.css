@@ -81,7 +81,15 @@
         padding-right: 0;
     }
 
+    .km-hero-name {
+        font-size: 1.5rem;
+    }
+
     .km-hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .km-hero-subtitle {
+        font-size: 1.25rem;
     }
 }

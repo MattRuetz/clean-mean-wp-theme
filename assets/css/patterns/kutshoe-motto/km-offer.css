@@ -35,10 +35,19 @@
 
 @media (max-width: 781px) {
     .km-offer {
-        padding: 2rem 1rem;
+        padding: 2rem;
     }
-    
+
+    .km-offer-container {
+        padding: 3rem 1rem;
+    }
+
+    .km-offer-outer-container {
+        padding: 1rem;
+    }
+
     .km-offer-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        line-height: 1.6;
     }
 }
