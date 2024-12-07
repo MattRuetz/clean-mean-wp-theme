@@ -1,0 +1,36 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-km-test-block {
+	border: 1px dotted #f00;
+
+	.km-tabs {
+		.km-tabs-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.km-tab-item {
+			cursor: pointer;
+			padding: 10px;
+			margin-bottom: 5px;
+			
+			&.active {
+				background-color: #f0f0f0;
+				font-weight: bold;
+			}
+		}
+
+		.km-tab-panel {
+			display: none;
+			
+			&.active {
+				display: block;
+			}
+		}
+	}
+}
