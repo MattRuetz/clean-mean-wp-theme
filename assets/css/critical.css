@@ -1,0 +1,13 @@
+/* Critical styles that should load immediately */
+
+/* This is an opacity fade-in transition to prevent FOUC */
+body {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-loaded {
+    opacity: 1;
+}
+
+/* Add other critical above-the-fold styles here */ 

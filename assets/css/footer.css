@@ -76,6 +76,17 @@
     color: var(--secondary);
 }
 
+.footer-copyright {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.footer-copyright a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 781px) {
     .footer-widgets {

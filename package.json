@@ -4,7 +4,9 @@
     "main": "index.js",
     "scripts": {
         "start": "wp-scripts start",
-        "build": "wp-scripts build"
+        "build": "wp-scripts build",
+        "start:km-tabs": "wp-scripts start --webpack-src-dir=blocks/km-tabs/src --output-path=blocks/km-tabs/build",
+        "build:km-tabs": "wp-scripts build --webpack-src-dir=blocks/km-tabs/src --output-path=blocks/km-tabs/build"
     },
     "keywords": [],
     "author": "",
@@ -12,5 +14,8 @@
     "description": "",
     "devDependencies": {
         "@wordpress/scripts": "^30.6.0"
+    },
+    "dependencies": {
+        "file-loader": "^6.2.0"
     }
 }

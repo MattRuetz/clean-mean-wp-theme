@@ -476,40 +476,43 @@ add_action('init', function () {
     ]);
 });
 
-// Include the render function
-include_once get_template_directory() . '/blocks/km-tabs/render.php';
 
-function register_km_tabs_block()
+add_action('init', function () {
+    register_block_type(__DIR__ . '/blocks/km-tabs/build');
+});
+
+function enqueue_critical_css()
 {
-    if (!function_exists('register_block_type')) {
-        error_log('register_block_type function does not exist');
-        return;
-    }
-
-    $result = register_block_type(__DIR__ . '/blocks/km-tabs');
-    if (is_wp_error($result)) {
-        error_log('Failed to register km-tabs block: ' . $result->get_error_message());
-    } else {
-        error_log('Successfully registered km-tabs block');
+    $critical_css = file_get_contents(get_template_directory() . '/assets/css/critical.css');
+    if ($critical_css) {
+        echo '<style id="critical-css">' . $critical_css . '</style>';
     }
 }
-add_action('init', 'register_km_tabs_block');
+add_action('wp_head', 'enqueue_critical_css', 1);
 
-// function debug_km_tabs_block()
-// {
-//     $registry = WP_Block_Type_Registry::get_instance();
-//     error_log('Registered blocks: ' . print_r($registry->get_all_registered(), true));
-// }
-// add_action('init', 'debug_km_tabs_block', 20);
+function output_preload_links()
+{
+    // Add your stylesheet preloads here
+    echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/assets/css/patterns/kutshoe-motto/km-about.css') . '" as="style" crossorigin="anonymous">';
+}
+add_action('wp_head', 'output_preload_links', 1);
 
+function optimize_stylesheet_loading()
+{
+    // Remove default style loading
+    wp_dequeue_style('km-styles'); // Adjust this to match your style handle
 
-// function debug_block_json()
-// {
-//     $block_json_path = __DIR__ . '/blocks/km-tabs/block.json';
-//     error_log('Block JSON path: ' . $block_json_path);
-//     error_log('Block JSON exists: ' . (file_exists($block_json_path) ? 'yes' : 'no'));
-//     if (file_exists($block_json_path)) {
-//         error_log('Block JSON content: ' . file_get_contents($block_json_path));
-//     }
-// }
-// add_action('init', 'debug_block_json', 5);
+    // Re-add with preload
+    wp_enqueue_style('km-styles', get_template_directory_uri() . '/assets/css/patterns/kutshoe-motto/km-about.css', array(), '1.0', 'all');
+}
+add_action('wp_enqueue_scripts', 'optimize_stylesheet_loading', 20);
+
+function add_fouc_prevention_script()
+{
+    echo '<script>
+        window.addEventListener("load", function() {
+            document.body.classList.add("content-loaded");
+        });
+    </script>';
+}
+add_action('wp_footer', 'add_fouc_prevention_script', 99);
