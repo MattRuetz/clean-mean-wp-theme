@@ -5,7 +5,7 @@
     height: 100vh;
     background-color: var(--accent);
     border-right: 1px solid var(--primary);
-    padding: 2rem;
+    padding: 6rem 2rem 2rem 2rem;
 }
 
 .jp-header-container {

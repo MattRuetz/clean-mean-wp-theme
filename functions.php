@@ -42,11 +42,24 @@ function cleanmean_setup()
             'singular_name' => __('Project', 'cleanmean')
         ),
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
-        'rewrite' => array('slug' => 'projects'),
+        'rewrite' => array('slug' => 'project'),
         'show_in_rest' => true,
     ));
+
+    // Redirect old projects archive URL to the Projects page
+    function redirect_projects_archive()
+    {
+        if (is_post_type_archive('project')) {
+            $projects_page = get_page_by_path('projects');
+            if ($projects_page) {
+                wp_redirect(get_permalink($projects_page->ID), 301);
+                exit;
+            }
+        }
+    }
+    add_action('template_redirect', 'redirect_projects_archive');
 
     // Add support for block styles
     add_theme_support('wp-block-styles');
@@ -324,6 +337,16 @@ function cleanmean_register_patterns()
             'categories'  => array('cleanmean', 'jake-portfolio'),
             'description' => __('A Jake Portfolio About section', 'cleanmean'),
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-about.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/jake-portfolio/jp-projects-grid',
+        array(
+            'title'       => __('Jake Portfolio Projects Grid', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A grid of projects', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects-grid.html'))
         )
     );
 }
