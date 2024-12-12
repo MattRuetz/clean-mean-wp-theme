@@ -1,0 +1,12 @@
+.jp-main {
+    margin-left: 300px;
+    padding: 3rem;
+    min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    .jp-main {
+        margin-left: 0;
+        padding: 2rem;
+    }
+}

@@ -121,6 +121,10 @@ function cleanmean_register_patterns()
         'label' => __('Kutshoe Motto', 'kutshoe-motto')
     ));
 
+    register_block_pattern_category('jake-portfolio', array(
+        'label' => __('Jake Portfolio', 'jake-portfolio')
+    ));
+
     register_block_pattern(
         'cleanmean/simple-hero',
         array(
@@ -312,6 +316,16 @@ function cleanmean_register_patterns()
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/kutshoe-motto/km-about.html'))
         )
     );
+
+    register_block_pattern(
+        'cleanmean/jake-portfolio/jp-about',
+        array(
+            'title'       => __('Jake Portfolio About', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A Jake Portfolio About section', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-about.html'))
+        )
+    );
 }
 add_action('init', 'cleanmean_register_patterns');
 
@@ -352,17 +366,47 @@ function get_current_template_content()
     return '';
 }
 
-function cleanmean_enqueue_pattern_styles()
+
+function cleanmean_enqueue_template_styles()
 {
-    static $already_run = false;
-    if ($already_run) return;
+    // Get current template name
+    $template = get_page_template_slug();
+    if (empty($template)) {
+        if (is_page()) {
+            $template = 'page'; // Default to page for pages
+        }
+    }
 
-    global $post;
-    if (!$post) return;
+    // Get template content
+    $template_path = get_template_directory() . '/templates/' . $template . '.html';
+    $template_content = file_exists($template_path) ? file_get_contents($template_path) : '';
 
-    $template_content = get_current_template_content();
-    $content = $post->post_content;
-    $full_content = $template_content . $content;
+    // Get page content
+    $post = get_post();
+    $page_content = $post ? $post->post_content : '';
+
+    // Combine both contents for parsing
+    $full_content = $template_content . $page_content;
+
+    // Get template parts from the combined content
+    preg_match_all('/"slug":"([^"]+)"/', $full_content, $template_parts_matches);
+
+    if (!empty($template_parts_matches[1])) {
+        foreach ($template_parts_matches[1] as $part) {
+            // Check for project-specific part CSS
+            $part_css_path = "/assets/css/parts/{$part}.css";
+            if (file_exists(get_template_directory() . $part_css_path)) {
+                wp_enqueue_style(
+                    "cleanmean-part-{$part}",
+                    get_template_directory_uri() . $part_css_path,
+                    array(),
+                    '1.0.0'
+                );
+            }
+        }
+    }
+
+    // Get patterns from the content
 
     // Find both pattern references AND transformed patterns with metadata
     $patterns = array();
@@ -426,10 +470,8 @@ function cleanmean_enqueue_pattern_styles()
             wp_add_inline_style('cleanmean-patterns', $combined_css);
         }
     }
-
-    $already_run = true;
 }
-add_action('wp_enqueue_scripts', 'cleanmean_enqueue_pattern_styles');
+add_action('wp_enqueue_scripts', 'cleanmean_enqueue_template_styles');
 
 // Add a function to clean up old cache files (optional)
 function cleanmean_cleanup_css_cache()
@@ -489,23 +531,6 @@ function enqueue_critical_css()
     }
 }
 add_action('wp_head', 'enqueue_critical_css', 1);
-
-function output_preload_links()
-{
-    // Add your stylesheet preloads here
-    echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/assets/css/patterns/kutshoe-motto/km-about.css') . '" as="style" crossorigin="anonymous">';
-}
-add_action('wp_head', 'output_preload_links', 1);
-
-function optimize_stylesheet_loading()
-{
-    // Remove default style loading
-    wp_dequeue_style('km-styles'); // Adjust this to match your style handle
-
-    // Re-add with preload
-    wp_enqueue_style('km-styles', get_template_directory_uri() . '/assets/css/patterns/kutshoe-motto/km-about.css', array(), '1.0', 'all');
-}
-add_action('wp_enqueue_scripts', 'optimize_stylesheet_loading', 20);
 
 function add_fouc_prevention_script()
 {
