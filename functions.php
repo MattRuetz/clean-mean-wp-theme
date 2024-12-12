@@ -332,41 +332,38 @@ add_action('init', 'cleanmean_register_patterns');
 
 // Expandable theme optimizations
 
-// Here is where the theme checks which patterns are being used on the current
-// page, and generates a dynamic css file for the page.
-
-function get_current_template_content()
+function enqueue_critical_css()
 {
-    // Get the currently assigned template
-    $current_template = get_page_template_slug();
-
-    if ($current_template) {
-        // error_log('CleanMean: Current template from WP: ' . $current_template);
-        // Convert the template filename to our HTML version
-        $template_path = str_replace('.php', '.html', $current_template);
-        $full_path = get_template_directory() . '/templates/' . basename($template_path);
-
-        if (file_exists($full_path)) {
-            // error_log('CleanMean: Loading template from: ' . $full_path);
-            return file_get_contents($full_path);
+    $project_slug = get_project_slug();
+    error_log('CleanMean: Project slug: ' . $project_slug);
+    if (!empty($project_slug)) {
+        $critical_css = file_get_contents(get_template_directory() . '/assets/css/main/' . $project_slug . '/critical.css');
+        if ($critical_css) {
+            echo '<style id="critical-css">' . $critical_css . '</style>';
         }
     }
+}
+add_action('wp_head', 'enqueue_critical_css', 1);
 
-    // Fallback to template hierarchy
-    // if (is_front_page() && file_exists(get_template_directory() . '/templates/home-page.html')) {
-    //     return file_get_contents(get_template_directory() . '/templates/home-page.html');
-    // } elseif (is_single() && file_exists(get_template_directory() . '/templates/single.html')) {
-    //     return file_get_contents(get_template_directory() . '/templates/single.html');
-    // } elseif (is_page() && file_exists(get_template_directory() . '/templates/page.html')) {
-    //     return file_get_contents(get_template_directory() . '/templates/page.html');
-    // } elseif (file_exists(get_template_directory() . '/templates/index.html')) {
-    //     return file_get_contents(get_template_directory() . '/templates/index.html');
-    // }
 
-    return '';
+function get_project_slug()
+{
+    $template = get_page_template_slug();
+    if (empty($template)) {
+        return '';
+    }
+    $project_slug = '';
+    $parts = explode('/', $template);
+    if (count($parts) > 1) {
+        array_pop($parts); // Remove last element
+        $project_slug = implode('/', $parts);
+    }
+    return $project_slug;
 }
 
 
+// Here is where the theme checks which patterns are being used on the current
+// page, and generates a dynamic css file for the page.
 function cleanmean_enqueue_template_styles()
 {
     // Get current template name
@@ -377,8 +374,21 @@ function cleanmean_enqueue_template_styles()
         }
     }
 
+
+    // Extract project slug from template path to load the project specific css ([xx]-main.css)
+    $project_slug = get_project_slug();
+
+
+    if (!empty($project_slug)) {
+        wp_enqueue_style('cleanmean-project-' . $project_slug, get_template_directory_uri() . '/assets/css/main/' . $project_slug . '/main.css', array(), '1.0.0');
+        wp_enqueue_style('cleanmean-project-' . $project_slug, get_template_directory_uri() . '/assets/css/main/' . $project_slug . '/critical.css', array(), '1.0.0');
+    }
+
+
     // Get template content
     $template_path = get_template_directory() . '/templates/' . $template . '.html';
+
+    // Get template content
     $template_content = file_exists($template_path) ? file_get_contents($template_path) : '';
 
     // Get page content
@@ -522,15 +532,6 @@ add_action('init', function () {
 add_action('init', function () {
     register_block_type(__DIR__ . '/blocks/km-tabs/build');
 });
-
-function enqueue_critical_css()
-{
-    $critical_css = file_get_contents(get_template_directory() . '/assets/css/critical.css');
-    if ($critical_css) {
-        echo '<style id="critical-css">' . $critical_css . '</style>';
-    }
-}
-add_action('wp_head', 'enqueue_critical_css', 1);
 
 function add_fouc_prevention_script()
 {
