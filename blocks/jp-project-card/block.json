@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "cleanmean/jp-project-card",
+    "version": "0.1.0",
+    "title": "JP Project Card",
+    "category": "jake-portfolio",
+    "icon": "portfolio",
+    "description": "A simple project card block for Jake's Portfolio",
+    "supports": {
+        "html": false
+    },
+    "textdomain": "cleanmean",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
+}

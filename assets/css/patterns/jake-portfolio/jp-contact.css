@@ -1,0 +1,166 @@
+.jp-contact {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.jp-contact-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.jp-contact-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.jp-contact-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+}
+
+.jp-contact-info {
+    padding-right: 3rem;
+}
+
+.jp-contact-info-title,
+.jp-contact-form-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.jp-contact-details {
+    margin-top: 2rem;
+}
+
+.jp-contact-item {
+    margin-bottom: 2rem;
+}
+
+.jp-contact-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.jp-contact-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.jp-contact-item a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.jp-contact-item a:hover {
+    color: #000;
+}
+
+.jp-contact-social {
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.jp-contact-social .wp-block-social-link {
+    transition: transform 0.3s ease;
+}
+
+.jp-contact-social .wp-block-social-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Contact Form 7 Styles */
+.jp-contact-form .wpcf7-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.jp-contact-form .wpcf7-form p {
+    margin: 0;
+}
+
+.jp-contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.jp-contact-form input[type="text"],
+.jp-contact-form input[type="email"],
+.jp-contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jp-contact-form input[type="text"]:focus,
+.jp-contact-form input[type="email"]:focus,
+.jp-contact-form textarea:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.jp-contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.jp-contact-form input[type="submit"] {
+    background: #000;
+    color: #fff;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.jp-contact-form input[type="submit"]:hover {
+    background: #333;
+}
+
+.jp-contact-form .wpcf7-response-output {
+    margin: 2rem 0 0;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .jp-contact {
+        padding: 2rem 1rem;
+    }
+
+    .jp-contact-title {
+        font-size: 2.5rem;
+    }
+
+    .jp-contact-content {
+        padding: 2rem;
+    }
+
+    .jp-contact-info {
+        padding-right: 0;
+        margin-bottom: 3rem;
+    }
+
+    .jp-contact .wp-block-columns {
+        flex-direction: column;
+    }
+}

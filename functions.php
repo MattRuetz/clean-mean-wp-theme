@@ -341,12 +341,52 @@ function cleanmean_register_patterns()
     );
 
     register_block_pattern(
+        'cleanmean/jake-portfolio/jp-projects-simple',
+        array(
+            'title'       => __('Jake Portfolio Projects Simple', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A projects archive page with simple project cards', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects-simple.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/jake-portfolio/jp-projects',
+        array(
+            'title'       => __('Jake Portfolio Projects', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A projects archive page with project cards', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects.html'))
+        )
+    );
+
+    register_block_pattern(
         'cleanmean/jake-portfolio/jp-projects-grid',
         array(
             'title'       => __('Jake Portfolio Projects Grid', 'cleanmean'),
             'categories'  => array('cleanmean', 'jake-portfolio'),
             'description' => __('A grid of projects', 'cleanmean'),
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects-grid.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/jake-portfolio/jp-contact',
+        array(
+            'title'       => __('Jake Portfolio Contact', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A contact page with form and contact information', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-contact.html'))
+        )
+    );
+
+    register_block_pattern(
+        'cleanmean/jake-portfolio/jp-projects-simple',
+        array(
+            'title'       => __('Jake Portfolio Projects Simple', 'cleanmean'),
+            'categories'  => array('cleanmean', 'jake-portfolio'),
+            'description' => __('A projects archive page with simple project cards', 'cleanmean'),
+            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects-simple.html'))
         )
     );
 }
@@ -549,8 +589,15 @@ add_action('init', function () {
             return ob_get_clean();
         }
     ]);
-});
 
+    register_block_type(__DIR__ . '/blocks/jp-project-card', [
+        'render_callback' => function ($attributes, $content, $block) {
+            ob_start();
+            include __DIR__ . '/blocks/jp-project-card/render.php';
+            return ob_get_clean();
+        }
+    ]);
+});
 
 add_action('init', function () {
     register_block_type(__DIR__ . '/blocks/km-tabs/build');
