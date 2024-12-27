@@ -105,6 +105,7 @@ function cleanmean_scripts()
     wp_enqueue_style('cleanmean-footer', get_template_directory_uri() . '/assets/css/footer.css', array(), '1.0.0');
     wp_enqueue_style('cleanmean-projects', get_template_directory_uri() . '/assets/css/projects.css', array(), '1.0.0');
     wp_enqueue_style('cleanmean-responsive', get_template_directory_uri() . '/assets/css/responsive.css', array(), '1.0.0');
+    wp_enqueue_style('jp-projects-simple', get_template_directory_uri() . '/assets/css/patterns/jake-portfolio/jp-projects-simple.css', array(), '1.0.0');
 
     // Your existing JS enqueue
     wp_enqueue_script('cleanmean-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);
@@ -155,16 +156,6 @@ function cleanmean_register_patterns()
             'description' => __('A three-column services section', 'cleanmean'),
             'categories'  => array('cleanmean', 'services'),
             'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/services-cards-3.html'))
-        )
-    );
-
-    register_block_pattern(
-        'cleanmean/featured-projects',
-        array(
-            'title'       => __('Featured Projects', 'cleanmean'),
-            'description' => __('A grid of featured projects', 'cleanmean'),
-            'categories'  => array('cleanmean', 'featured'),
-            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/featured-projects.html'))
         )
     );
 
@@ -350,15 +341,6 @@ function cleanmean_register_patterns()
         )
     );
 
-    register_block_pattern(
-        'cleanmean/jake-portfolio/jp-projects',
-        array(
-            'title'       => __('Jake Portfolio Projects', 'cleanmean'),
-            'categories'  => array('cleanmean', 'jake-portfolio'),
-            'description' => __('A projects archive page with project cards', 'cleanmean'),
-            'content'     => cleanmean_clean_pattern_content(file_get_contents(get_template_directory() . '/patterns/jake-portfolio/jp-projects.html'))
-        )
-    );
 
     register_block_pattern(
         'cleanmean/jake-portfolio/jp-projects-grid',

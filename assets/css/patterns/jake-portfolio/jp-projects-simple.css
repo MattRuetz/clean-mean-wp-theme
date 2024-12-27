@@ -1,0 +1,67 @@
+.jp-projects {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.jp-projects-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+.jp-projects-grid {
+    margin-top: 2rem;
+}
+
+/* Grid Layout */
+.jp-projects-simple-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0 !important;
+    padding: 0 !important;
+}
+
+.jp-project-card {
+    position: relative;
+    border: 3px solid var(--primary);
+    margin-left: -3px;
+    margin-top: 3px;
+}
+
+/* First column items - restore left border */
+.jp-projects-simple-grid > *:nth-child(3n+1) .jp-project-card {
+    margin-left: 0;
+}
+
+/* First row items - restore top border */
+.jp-projects-simple-grid > *:nth-child(-n+3) .jp-project-card {
+    margin-top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .jp-projects {
+        padding: 2rem 1rem;
+    }
+
+    .jp-projects-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .jp-projects-simple-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Reset margins for mobile */
+    .jp-project-card {
+        margin-left: 0;
+        margin-top: -3px;
+    }
+
+    .jp-projects-simple-grid > *:first-child .jp-project-card {
+        margin-top: 0;
+    }
+}
