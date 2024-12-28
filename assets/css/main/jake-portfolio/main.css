@@ -2,3 +2,10 @@ main {
     width: calc(100% - 300px) !important;
     left: 300px !important;
 }
+
+@media (max-width: 768px) {
+    main {
+        width: 100% !important;
+        left: 0 !important;
+    }
+}
